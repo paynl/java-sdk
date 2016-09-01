@@ -42,6 +42,13 @@ public class HttpServiceInteraction {
             StringBuffer stringBuffer = new StringBuffer();
             if (urlConn.getResponseCode() == 200) {
                 br = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+            }
+            else if (urlConn.getResponseCode() >= 400 && urlConn.getResponseCode() < 500){
+                // Return manually crafted json
+                // Really sorry about this, but I want something that resembles generic solutions for errors
+                String response =
+                        "{\"request\":{\"result\":\"0\",\"errorId\":\"" + urlConn.getResponseCode() + "\",\"errorMessage\":\""+ urlConn.getResponseMessage() +"\"}}";
+                return response;
             } else {
                 br = new BufferedReader(new InputStreamReader(urlConn.getErrorStream()));
             }
@@ -57,7 +64,13 @@ public class HttpServiceInteraction {
             throw ex;
         } finally {
             wr.close();
-            br.close();
+            try {
+                br.close();
+            }
+            catch(Exception exception)
+            {
+                // Don't do anything as it's probably closed already.
+            }
         }
     }
 }

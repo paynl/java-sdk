@@ -2,6 +2,7 @@ package nl.pay.sdk;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import nl.pay.sdk.resulterror.Result;
 import nl.pay.sdk.servicelist.ServiceListResult;
 
 public class ServiceListService implements ServiceRequest {
@@ -55,10 +56,21 @@ public class ServiceListService implements ServiceRequest {
             result = gson.fromJson(this.resultObject, ServiceListResult.class);
         }
         catch (JsonSyntaxException exception) {
-            result = new ServiceListResult();
-            result.internalInit();
-            result.request.result = "0";
-            result.request.errorMessage = "Unable to process API response.";
+            // Trying again, just to parse the error
+            try {
+                Result error = gson.fromJson(this.resultObject, Result.class);
+                result = new ServiceListResult();
+                result.internalInit();
+                result.request.result = error.request.result;
+                result.request.errorMessage = error.request.errorMessage;
+                result.request.errorId = error.request.errorId;
+            }
+            catch(JsonSyntaxException exception2) {
+                result = new ServiceListResult();
+                result.internalInit();
+                result.request.result = "0";
+                result.request.errorMessage = "Unable to process API response.";
+            }
         }
 
         return result;
