@@ -12,6 +12,33 @@ public class TransactionInfoResultPaymentDetails {
     public String stateDescription;
     public int paymentOptionId;
     public int paymentOptionSubId;
+    public String identifierName = "";
+    public String identifierPublic = "";
+    public String identifierHash = "";
+
+    public String getIdentifierName() {
+        return identifierName;
+    }
+
+    public void setIdentifierName(String identifierName) {
+        this.identifierName = identifierName;
+    }
+
+    public String getIdentifierPublic() {
+        return identifierPublic;
+    }
+
+    public void setIdentifierPublic(String identifierPublic) {
+        this.identifierPublic = identifierPublic;
+    }
+
+    public String getIdentifierHash() {
+        return identifierHash;
+    }
+
+    public void setIdentifierHash(String identifierHash) {
+        this.identifierHash = identifierHash;
+    }
 
     public String getAmount() {
         return amount;
