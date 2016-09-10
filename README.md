@@ -15,6 +15,13 @@ With this SDK you will be able to start transactions and retrieve transactions w
 This SDK depends on the following:
 * [Google GSON library](https://github.com/google/gson) (included in JAR release)
 
+### Getting everything installed
+You can import nl.pay.sdk from the Maven repository at [Sonatype][https://oss.sonatype.org/#nexus-search;quick~pay.nl].
+You should see it, when looking for:
+ nl.pay:sdk
+
+You should select the latest version in your IDE.
+
 
 ### Usage
 _Creating a transaction_
