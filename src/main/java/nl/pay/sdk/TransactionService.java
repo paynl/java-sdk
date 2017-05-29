@@ -67,7 +67,7 @@ public class TransactionService implements ServiceRequest {
 
 
     public String startRequest() {
-        String urlBase = "http://token:" + token + "@rest-api.pay.nl/v5/transaction/start/json";
+        String urlBase = "https://token:" + token + "@rest-api.pay.nl/v5/transaction/start/json";
 
         String data = Helper.addToUrl("serviceId", serviceId) +
                 "&" + Helper.addToUrl("amount", amount.toString()) +
