@@ -24,12 +24,35 @@ You should select the latest version in your IDE.
 
 
 ### Usage
+
+_Fetching available payment methods and banks_
+```Java
+        ServiceListService service = new ServiceListService();
+        service.setToken("token");
+        service.setServiceId("SL-code-here");
+
+        ServiceListResult serviceListResult = service.getResult();
+
+        serviceListResult.getPaymentMethods().values().forEach(paymentMethod -> {
+            System.out.println(paymentMethod.id+" - "+paymentMethod.name);
+
+            if(paymentMethod.paymentOptionSubList != null){
+                paymentMethod.paymentOptionSubList.values().forEach(bank ->{
+                    System.out.println(" ↳ "+bank.id+" - "+bank.name);
+                });
+            }
+        });
+
+```
+
 _Creating a transaction_
 ```Java
          TransactionService transaction = new TransactionService();
          transaction.setToken("token");
          transaction.setServiceId("SL-code-here");
          transaction.setTestMode(false);
+         transaction.setPaymentOptionId(10); // PaymentMethod.id from the example
+         transaction.setPaymentOptionSubId(1); // bank.id from the example above
          transaction.setAmount(199); // 1.99 euro
          transaction.setIpAddress("127.0.0.1");
          transaction.setfinishUrl("https://pay.nl"); // Params will be added by Pay.nl

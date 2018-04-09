@@ -1,11 +1,14 @@
 package nl.pay.sdk.servicelist;
 
+import java.util.*;
+
 public class ServiceListResult {
 
-    public ServiceListResultRequest request;
-    public ServiceListResultMerchant merchant;
-    public ServiceListResultService service;
-    public ServiceListResultCountryOptionList countryOptionList;
+    public Request request;
+    public Merchant merchant;
+    public Service service;
+
+    public Map<String, Country> countryOptionList;
 
     /**
      * internalInit
@@ -14,10 +17,10 @@ public class ServiceListResult {
      */
     public void internalInit()
     {
-        request = new ServiceListResultRequest();
-        merchant = new ServiceListResultMerchant();
-        service = new ServiceListResultService();
-        countryOptionList = new ServiceListResultCountryOptionList();
+        request = new Request();
+        merchant = new Merchant();
+        service = new Service();
+        countryOptionList = new HashMap<String, Country>();
     }
 
     /**
@@ -33,4 +36,17 @@ public class ServiceListResult {
         return false;
     }
 
+    public Map<Integer, PaymentOption> getPaymentMethods(){
+        Map<Integer, PaymentOption> paymentOptions = new HashMap<Integer, PaymentOption>();
+
+        for(Country country :this.countryOptionList.values()){
+            for(PaymentOption paymentOption: country.paymentOptionList.values()){
+                if (!paymentOptions.containsKey(paymentOption.id)){
+                    paymentOptions.put(paymentOption.id, paymentOption);
+                }
+            }
+        }
+
+        return paymentOptions;
+    }
 }
