@@ -51,7 +51,7 @@ _Creating a transaction_
          transaction.setToken("token");
          transaction.setServiceId("SL-code-here");
          transaction.setTestMode(false);
-         transaction.setPaymentOptionId(10); // PaymentMethod.id from the example
+         transaction.setPaymentOptionId(10); // PaymentMethod.id from the example above
          transaction.setPaymentOptionSubId(1); // bank.id from the example above
          transaction.setAmount(199); // 1.99 euro
          transaction.setIpAddress("127.0.0.1");

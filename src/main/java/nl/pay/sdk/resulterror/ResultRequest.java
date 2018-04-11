@@ -7,7 +7,7 @@ public class ResultRequest {
 
     /**
      * getResult - Return the result status (did the request go okay?)
-     * @return ServiceListResult status
+     * @return Result status
      */
     public String getResult() {
         return result;
