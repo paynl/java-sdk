@@ -1,7 +1,7 @@
 package nl.pay.sdk.servicelist;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Country {
     public String id;
@@ -10,7 +10,7 @@ public class Country {
     public int in_eu;
     public String img;
     public String path;
-    public List<PaymentOptionList> PaymentOptionList = new ArrayList<PaymentOptionList>();
+    public Map<String,PaymentOption> paymentOptionList = new HashMap<String, PaymentOption>();
 
     /**
      * getId - get internal id of country
@@ -64,7 +64,7 @@ public class Country {
      * getPaymentOptionList - Returns list of payment options
      * @return List of payment options
      */
-    public List<nl.pay.sdk.servicelist.PaymentOptionList> getPaymentOptionList() {
-        return PaymentOptionList;
+    public Map<String,PaymentOption>  getPaymentOptionList() {
+        return paymentOptionList;
     }
 }

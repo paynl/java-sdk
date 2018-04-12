@@ -1,7 +1,7 @@
 package nl.pay.sdk.servicelist;
 
 
-public class ServiceListResultMerchant {
+public class Merchant {
     public String id;
     public String name;
     public String publicName;

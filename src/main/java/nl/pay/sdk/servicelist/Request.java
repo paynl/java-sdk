@@ -1,6 +1,6 @@
 package nl.pay.sdk.servicelist;
 
-public class ServiceListResultRequest {
+public class Request {
     public String result;
     public String errorId;
     public String errorMessage;

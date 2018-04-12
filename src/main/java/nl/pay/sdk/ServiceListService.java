@@ -2,7 +2,6 @@ package nl.pay.sdk;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import nl.pay.sdk.resulterror.Result;
 import nl.pay.sdk.servicelist.ServiceListResult;
 
 public class ServiceListService implements ServiceRequest {
@@ -58,7 +57,7 @@ public class ServiceListService implements ServiceRequest {
         catch (JsonSyntaxException exception) {
             // Trying again, just to parse the error
             try {
-                Result error = gson.fromJson(this.resultObject, Result.class);
+                nl.pay.sdk.resulterror.Result error = gson.fromJson(this.resultObject, nl.pay.sdk.resulterror.Result.class);
                 result = new ServiceListResult();
                 result.internalInit();
                 result.request.result = error.request.result;
