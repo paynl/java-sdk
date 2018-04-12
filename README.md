@@ -16,7 +16,7 @@ This SDK depends on the following:
 * [Google GSON library](https://github.com/google/gson) (included in JAR release)
 
 ### Getting everything installed
-You can import nl.pay.sdk from the Maven repository at [Sonatype][https://oss.sonatype.org/#nexus-search;quick~pay.nl].
+You can import nl.pay.sdk from the Maven repository at [Sonatype](https://oss.sonatype.org/#nexus-search;quick~pay.nl).
 You should see it, when looking for:
  nl.pay:sdk
 
