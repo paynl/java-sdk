@@ -62,7 +62,6 @@ Codedeploy:
     - cat ~/.m2/settings.xml
     - gpg --sign pom.xml
     - mvn clean verify
-    - exit 1
     - mvn $MAVEN_CLI_OPTS deploy -Dmaven.test.skip=true -B -U -X
     - echo "installing the package in repository"
   only:
