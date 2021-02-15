@@ -9,7 +9,7 @@ public class PaymentOption {
     public int id;
     public String name;
     public String visibleName;
-    public String img;
+    public String image;
     public String path;
     public int state;
     public int useOnlyInStore;
@@ -49,11 +49,20 @@ public class PaymentOption {
     /**
      * getImg - Image of the payment option
      * You can use this, together with getPath to concat the entire image URL
-     *
+     * @deprecated Replaced by getImage()
      * @return image url part of the payment option
      */
     public String getImg() {
-        return img;
+        return image;
+    }
+
+    /**
+     * getImage - Image of the payment option
+     *
+     * @return image url part of the payment option
+     */
+    public String getImage() {
+        return image;
     }
 
     /**

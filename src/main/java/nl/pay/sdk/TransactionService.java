@@ -220,18 +220,21 @@ public class TransactionService implements ServiceRequest {
             // Okay... Now all fields are required!
             data = data + "&" + Helper.addToUrl("saleData[invoiceDate]", saleData.invoiceDate);
             data = data + "&" + Helper.addToUrl("saleData[deliveryDate]", saleData.deliveryDate);
-            Integer iterator = -1;
-            for (Product product : saleData.orderData) {
-                iterator++;
-                data = data + "&" + Helper.addToUrl("saleData[orderData][" + iterator.toString() + "][productId]", product.productId);
-                if (product.description.length() > 0) {
-                    data = data + "&" + Helper.addToUrl("saleData[orderData][" + iterator.toString() + "][description]", product.description);
-                }
-                data = data + "&" + Helper.addToUrl("saleData[orderData][" + iterator.toString() + "][price]", product.price.toString());
-                data = data + "&" + Helper.addToUrl("saleData[orderData][" + iterator.toString() + "][quantity]", product.quantity.toString());
-                data = data + "&" + Helper.addToUrl("saleData[orderData][" + iterator.toString() + "][vatCode]", product.vatCode);
-            }
         }
+
+        Integer iterator = -1;
+        for (Product product : saleData.orderData) {
+            iterator++;
+            data = data + "&" + Helper.addToUrl("saleData[orderData][" + iterator.toString() + "][productId]", product.productId);
+            if (product.description.length() > 0) {
+                data = data + "&" + Helper.addToUrl("saleData[orderData][" + iterator.toString() + "][description]", product.description);
+            }
+            data = data + "&" + Helper.addToUrl("saleData[orderData][" + iterator.toString() + "][price]", product.price.toString());
+            data = data + "&" + Helper.addToUrl("saleData[orderData][" + iterator.toString() + "][quantity]", product.quantity.toString());
+            data = data + "&" + Helper.addToUrl("saleData[orderData][" + iterator.toString() + "][vatCode]", product.vatCode);
+            data = data + "&" + Helper.addToUrl("saleData[orderData][" + iterator.toString() + "][productType]", product.type);
+        }
+
         if (testMode) {
             data = data + "&" + Helper.addToUrl("testMode", "1");
         }

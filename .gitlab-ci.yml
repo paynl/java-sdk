@@ -1,0 +1,69 @@
+image: maven:3-openjdk-8
+
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+
+stages:
+  - build
+  - test
+  - package
+  - deploy
+
+before_script:
+  - echo $MAVEN_SETTINGS | base64 --decode > ~/.m2/settings.xml
+  - echo $MAVEN_SECURITY | base64 --decode > ~/.m2/settings-security.xml
+  - apt-get update
+  - apt-get remove --purge gnupg gnupg2 -y
+  - apt-get install pinentry-curses gnupg1 scdaemon -y
+
+codebuild:
+  stage: build
+  script:
+    - mvn compile
+
+codetest:
+  stage: test
+  script:
+    - mvn $MAVEN_CLI_OPTS test
+    - echo "The code has been tested"
+
+Codepackage:
+  stage: package
+  script:
+    - mvn $MAVEN_CLI_OPTS package -Dmaven.test.skip=true
+    - echo "Packaging the code"
+  artifacts:
+    paths:
+      - target/*.*ar
+  only:
+    - master
+
+Codedeploy:
+  stage: deploy
+  script:
+    - echo "Setup..."
+    - gpgconf --kill gpg-agent  
+    - eval $(gpg-agent --daemon --no-grab --debug-level 9 --pinentry-program /usr/bin/pinentry-curses | tee /dev/tty)
+    - export GPG_AGENT_INFO
+    - export GPG_TTY=$(tty)
+    - echo $GPG_SECRET_KEYS | base64 --decode | gpg --import --no-tty --batch --yes
+    - echo $GPG_OWNERTRUST | base64 --decode | gpg --import-ownertrust
+    - gpg --version || true
+    - gpg --list-keys
+    - gpg --list-secret-keys
+    - ln -s $(which gpg) /usr/bin/gpg2
+    - echo "Testing secrets..."
+    - echo test | gpg --clearsign -v
+    - cat ~/.m2/settings.xml
+    - gpg --sign pom.xml
+    - mvn clean verify
+    - exit 1
+    - mvn $MAVEN_CLI_OPTS deploy -Dmaven.test.skip=true -B -U -X
+    - echo "installing the package in repository"
+  only:
+    - master

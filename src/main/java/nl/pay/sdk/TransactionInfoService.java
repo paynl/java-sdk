@@ -65,10 +65,13 @@ public class TransactionInfoService implements ServiceRequest {
     public String startRequest() {
         String urlBase = "https://token:" + token + "@rest-api.pay.nl/v5/transaction/info/json";
         try {
-            String data = Helper.addToUrl("transactionId", transactionId);
+            String data = Helper.addToUrl("serviceId", serviceId) +
+                    "&" + Helper.addToUrl("transactionId", transactionId);
             if (!entranceCode.equals("")) {
                 data += "&" + Helper.addToUrl("entranceCode", entranceCode);
             }
+
+            data = data + "&" + Helper.addToUrl("token", token);
             if (httpService == null) {
                 httpService = new HttpServiceInteraction();
             }

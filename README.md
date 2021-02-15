@@ -65,6 +65,15 @@ _Creating a transaction_
          transaction.endUser.address.setStreetNumber("1");
          transaction.endUser.address.setZipCode("1234AA");
          transaction.endUser.address.setCity("Spijkenisse");
+         // Optionally : sending products to the system
+         Product prod = new Product();
+         prod.setType(Product.PRODUCT_TYPE_DOWNLOAD);
+         prod.setPrice(98);
+         prod.setDescription("Test product download");
+         prod.setQuantity(1);
+         prod.setProductId("1");
+         transaction.saleData.addProduct(prod);
+         
          transaction.startRequest(); // Do the actual request
          TransactionResult result = transaction.getResult(); // Return the result object
          if (result.request.result.equalsIgnoreCase("1")) {

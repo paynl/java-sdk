@@ -4,8 +4,7 @@ public class PaymentOptionSub {
     public int id;
     public String name;
     public String visibleName;
-    public String img;
-    public String path;
+    public String image;
     public int state;
 
     /**
@@ -32,12 +31,22 @@ public class PaymentOptionSub {
         return visibleName;
     }
 
-    public String getImg() {
-        return img;
+    /**
+     * @deprecated Has been replaced by getImage()
+     * @return image
+     */
+    public String getImg(){ return image; }
+
+    public String getImage() {
+        return image;
     }
 
+    /**
+     * @deprecated Has been removed, will now return empty string
+     * @return
+     */
     public String getPath() {
-        return path;
+        return "";
     }
 
     public int getState() {

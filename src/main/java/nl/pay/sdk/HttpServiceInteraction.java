@@ -1,5 +1,7 @@
 package nl.pay.sdk;
 
+import org.apache.commons.codec.binary.Base64;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -32,7 +34,8 @@ public class HttpServiceInteraction {
 //			urlConn.setRequestMethod("GET");
             urlConn.setDoOutput(true);
             if (urlObj.getUserInfo() != null) {
-                String basicAuth = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(urlObj.getUserInfo().getBytes());
+//                String basicAuth = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(urlObj.getUserInfo().getBytes());
+                String basicAuth = "Basic " + Base64.encodeBase64( urlObj.getUserInfo().getBytes() ).toString();
                 urlConn.setRequestProperty("Authorization", basicAuth);
             }
             wr = new OutputStreamWriter(urlConn.getOutputStream());

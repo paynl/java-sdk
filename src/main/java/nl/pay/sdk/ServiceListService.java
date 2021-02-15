@@ -25,7 +25,7 @@ public class ServiceListService implements ServiceRequest {
     }
 
     public String startRequest() {
-        String urlBase = "https://rest-api.pay.nl/v5/transaction/getService/json";
+        String urlBase = "https://rest-api.pay.nl/v16/transaction/getService/json";
         String data = Helper.addToUrl("token",token);
         data += "&" + Helper.addToUrl("serviceId",serviceId);
         if (!paymentMethodId.equals("")) {

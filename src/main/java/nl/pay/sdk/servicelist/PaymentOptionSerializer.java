@@ -20,8 +20,7 @@ public class PaymentOptionSerializer implements JsonDeserializer<PaymentOption> 
         result.id = jsonObject.get("id").getAsInt();
         result.name = jsonObject.get("name").getAsString();
         result.visibleName = jsonObject.get("visibleName").getAsString();
-        result.img = jsonObject.get("img").getAsString();
-        result.path = jsonObject.get("path").getAsString();
+        result.image = jsonObject.get("image").getAsString();
         result.state = jsonObject.get("state").getAsInt();
         result.useOnlyInStore = jsonObject.get("useOnlyInStore").getAsInt();
         result.paymentMethodId = jsonObject.get("paymentMethodId").getAsInt();
