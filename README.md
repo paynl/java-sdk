@@ -101,6 +101,24 @@ Retrieving transaction status
         System.out.println(result.request.errorMessage);
 ```
 
+Refunding a transaction
+```Java
+        TransactionRefundService refund = new TransactionRefundService();
+        refund.setToken("token_here");
+        refund.setServiceId("SL-code-here");
+        refund.setAmount(200);
+        refund.setTransactionId("EX-code-inthis-field");
+        refund.setDescription("Test refund");
+        refund.startRequest();
+        nl.pay.sdk.refund.TransactionResult result = refund.getResult();
+        if (result.getAmountRefunded() == 0)
+        {
+            System.out.println(result.getError());
+            System.out.println(result.description);
+        }
+        System.out.println(result.getAmountRefunded());
+```
+
 ### Contributing
 
 Please file pull requests to this repository, when checked, this will be merged and included in next releases.
