@@ -28,8 +28,8 @@ You should select the latest version in your IDE.
 _Fetching available payment methods and banks_
 ```Java
         ServiceListService service = new ServiceListService();
-        service.setToken("token");
-        service.setServiceId("SL-code-here");
+        service.setToken("****************************************");
+        service.setServiceId("SL-####-####");
 
         ServiceListResult serviceListResult = service.getResult();
 
@@ -48,8 +48,8 @@ _Fetching available payment methods and banks_
 _Creating a transaction_
 ```Java
          TransactionService transaction = new TransactionService();
-         transaction.setToken("token");
-         transaction.setServiceId("SL-code-here");
+         transaction.setToken("****************************************");
+         transaction.setServiceId("SL-####-####");
          transaction.setTestMode(false);
          transaction.setPaymentOptionId(10); // PaymentMethod.id from the example above
          transaction.setPaymentOptionSubId(1); // bank.id from the example above
@@ -88,8 +88,8 @@ Retrieving transaction status
 ```Java
         // Getting transaction status
         TransactionInfoService transactionInfoService = new TransactionInfoService();
-        transactionInfoService.setServiceId("SL-6418-1480");
-        transactionInfoService.setToken("Replacebytoken");
+        transactionInfoService.setServiceId("SL-####-####");
+        transactionInfoService.setToken("****************************************");
         transactionInfoService.setTransactionId("696298750X366d6a");
         transactionInfoService.startRequest();
         TransactionInfoResult result = transactionInfoService.getResult();
@@ -104,8 +104,8 @@ Retrieving transaction status
 Refunding a transaction
 ```Java
         TransactionRefundService refund = new TransactionRefundService();
-        refund.setToken("token_here");
-        refund.setServiceId("SL-code-here");
+        refund.setToken("****************************************");
+        refund.setServiceId("SL-####-####");
         refund.setAmount(200);
         refund.setTransactionId("EX-code-inthis-field");
         refund.setDescription("Test refund");
