@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 
 public class HttpServiceInteraction {
@@ -34,8 +35,9 @@ public class HttpServiceInteraction {
 //			urlConn.setRequestMethod("GET");
             urlConn.setDoOutput(true);
             if (urlObj.getUserInfo() != null) {
-//                String basicAuth = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(urlObj.getUserInfo().getBytes());
-                String basicAuth = "Basic " + Base64.encodeBase64( urlObj.getUserInfo().getBytes() ).toString();
+                String auth = urlObj.getUserInfo();
+                byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.UTF_8));
+                String basicAuth = "Basic " + new String(encodedAuth);
                 urlConn.setRequestProperty("Authorization", basicAuth);
             }
             wr = new OutputStreamWriter(urlConn.getOutputStream());
