@@ -61,6 +61,7 @@ _Creating a transaction_
          transaction.endUser.setLanguage("NL"); // ISO code (ISO 639-1)
          transaction.endUser.setInitials("T");
          transaction.endUser.setLastName("Testpersoon");
+         transaction.endUser.setCustomerReference("ExampleRef");
          transaction.endUser.address.setStreetName("Example street");
          transaction.endUser.address.setStreetNumber("1");
          transaction.endUser.address.setZipCode("1234AA");

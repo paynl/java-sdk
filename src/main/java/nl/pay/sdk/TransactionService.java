@@ -162,7 +162,9 @@ public class TransactionService implements ServiceRequest {
             data = data + "&" + Helper.addToUrl("enduser[sendConfirmEmail]", (endUser.sendConfirmEmail ? "true" : "false"));
             data = data + "&" + Helper.addToUrl("enduser[confirmMailTemplate]", endUser.confirmMailTemplate);
         }
-
+        if (endUser.customerReference.length() > 0) {
+            data = data + "&" + Helper.addToUrl("enduser[customerReference]", endUser.customerReference);
+        }
 
         if (endUser.address.streetName.length() > 0) {
             data = data + "&" + Helper.addToUrl("enduser[address][streetName]", endUser.address.streetName);

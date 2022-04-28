@@ -17,6 +17,24 @@ public class EndUser {
     public Address address = new Address();
     public InvoiceAddress invoiceAddress = new InvoiceAddress();
 
+    public String customerReference = "";
+
+    /**
+     * getCustomerReference
+     * @return the customer reference
+     */
+    public String getCustomerReference() {
+        return customerReference;
+    }
+
+    /**
+     * setCustomerReference
+     * @param customerReference The unique reference of the customer (max 32 chars)
+     */
+    public void setCustomerReference(String customerReference) {
+        this.customerReference = customerReference;
+    }
+
     /**
      * getAccessCode
      * @deprecated
